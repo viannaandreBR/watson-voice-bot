@@ -131,6 +131,6 @@ def getTtsToken():
     return retvalue
 
 
-port = os.getenv('PORT', '2000')
+port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=int(port))
