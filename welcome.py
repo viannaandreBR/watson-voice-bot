@@ -96,24 +96,20 @@ def getConvResponse():
         print(convContext)
         jsonContext = json.loads(convContext)
 
-        response = assistant.message(workspace_id=workspace_id,
-                                     input={'text': convText},
-                                     context=jsonContext)
+        response = assistant.message(workspace_id=workspace_id,input={'text': convText},context=jsonContext)
     except Exception as e:
         print(e)
 
     print(response)
     reponseText = response["output"]["text"]
-    responseDetails = {'responseText': reponseText[0],
-                       'context': response["context"]}
+    responseDetails = {'responseText': reponseText[0],'context': response["context"]}
     return jsonify(results=responseDetails)
 
 
 @app.route('/api/speech-to-text/token', methods=['POST', 'GET'])
 def getSttToken():
     try:
-        authorization = AuthorizationV1(username=speechToTextUser,
-                                        password=speechToTextPassword)
+        authorization = AuthorizationV1(username=speechToTextUser,password=speechToTextPassword)
         retvalue = authorization.get_token(url=SpeechToTextV1.default_url)
     except Exception as e:
         print(e)
@@ -123,8 +119,7 @@ def getSttToken():
 @app.route('/api/text-to-speech/token', methods=['POST', 'GET'])
 def getTtsToken():
     try:
-        authorization = AuthorizationV1(username=textToSpeechUser,
-                                        password=textToSpeechPassword)
+        authorization = AuthorizationV1(username=textToSpeechUser,password=textToSpeechPassword)
         retvalue = authorization.get_token(url=TextToSpeechV1.default_url)
     except Exception as e:
         print(e)
